@@ -1,0 +1,9 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t aryas09/docker-react -f Dockerfile
+
+script:
+  - docker run aryas09/docker-react npm run test -- --coverage
