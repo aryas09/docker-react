@@ -1,4 +1,5 @@
 sudo: required
+language: generic
 services:
   - docker
 
@@ -7,3 +8,16 @@ before_install:
 
 script:
   - docker run aryas09/docker-react npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "ap-southeast"
+  app: "docker"
+  env: "Docker-env"
+  bucket_name: "elasticbeanstalk-ap-southeast-2-837754569769"
+  bucket_path: "docker"
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
